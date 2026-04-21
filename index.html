@@ -3,7 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <title>StoryTime - Kids Platform</title>
+    <script>
+      (function() {
+        try {
+          var state = localStorage.getItem('story-app-storage');
+          if (state) {
+            var parsed = JSON.parse(state);
+            if (parsed && parsed.state && parsed.state.isDarkMode) {
+              document.documentElement.classList.add('dark');
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

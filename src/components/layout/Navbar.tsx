@@ -21,7 +21,8 @@ export function Navbar() {
 
   // Sync dark mode on mount
   useEffect(() => {
-    if (isDarkMode) document.body.classList.add('dark');
+    if (isDarkMode) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   }, [isDarkMode]);
 
   return (

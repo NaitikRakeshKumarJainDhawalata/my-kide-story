@@ -23,13 +23,13 @@ export const useAppStore = create<AppState>()(
       isDarkMode: false,
       toggleDarkMode: () => set((state) => {
         const newMode = !state.isDarkMode;
-        if (newMode) document.body.classList.add('dark');
-        else document.body.classList.remove('dark');
+        if (newMode) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
         return { isDarkMode: newMode };
       }),
       setDarkMode: (isDark) => set(() => {
-        if (isDark) document.body.classList.add('dark');
-        else document.body.classList.remove('dark');
+        if (isDark) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
         return { isDarkMode: isDark };
       }),
       
