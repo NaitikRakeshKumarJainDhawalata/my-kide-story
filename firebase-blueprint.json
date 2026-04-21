@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "Admin": {
+      "title": "Admin",
+      "description": "Admin user profile",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" }
+      },
+      "required": ["email"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Story category",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "slug": { "type": "string" },
+        "theme": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["name", "slug", "theme", "imageUrl", "status"]
+    },
+    "Story": {
+      "title": "Story",
+      "description": "Story content",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "theme": { "type": "string" },
+        "language": { "type": "string" },
+        "bannerImageUrl": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "content": { "type": "string" },
+        "metaTitle": { "type": "string" },
+        "metaDescription": { "type": "string" },
+        "keywords": { "type": "string" },
+        "readingTime": { "type": "number" },
+        "viewCount": { "type": "number" },
+        "status": { "type": "string", "enum": ["published", "draft"] },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["title", "slug", "categoryId", "language", "content", "status"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Global Settings",
+      "type": "object",
+      "properties": {
+        "heroImageUrl": { "type": "string" },
+        "socialLinks": { "type": "object" },
+        "ads": { "type": "object" },
+        "updatedAt": { "type": "number" }
+      }
+    }
+  },
+  "firestore": {
+    "admins/{adminId}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "Administrators"
+    },
+    "categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Categories for stories"
+    },
+    "stories/{storyId}": {
+      "schema": { "$ref": "#/entities/Story" },
+      "description": "Stories"
+    },
+    "settings/{documentId}": {
+      "schema": { "$ref": "#/entities/Settings" },
+      "description": "Global platform settings"
+    }
+  }
+}

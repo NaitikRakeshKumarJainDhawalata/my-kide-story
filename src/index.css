@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Nunito:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito", "Poppins", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Poppins", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-pastel-blue: #E3F2FD;
+  --color-pastel-pink: #FCE4EC;
+  --color-pastel-green: #E8F5E9;
+  --color-pastel-yellow: #FFF9C4;
+  --color-pastel-purple: #F3E5F5;
+  --color-pastel-peach: #FFE0B2;
+
+  --color-dark-bg: #121212;
+  --color-dark-surface: #1e1e1e;
+  --color-dark-text: #e0e0e0;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-slate-50 text-slate-900 transition-colors duration-300;
+  }
+  
+  body.dark {
+    @apply bg-dark-bg text-dark-text;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-slate-800;
+  }
+  
+  body.dark h1, body.dark h2, body.dark h3, 
+  body.dark h4, body.dark h5, body.dark h6 {
+    @apply text-slate-100;
+  }
+}
+
+/* Theme Utilities */
+.theme-default { @apply bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800; }
+.theme-kids { @apply bg-gradient-to-br from-pastel-pink to-pastel-yellow dark:from-[#3a202b] dark:to-[#383515]; }
+.theme-horror { @apply bg-gradient-to-br from-slate-900 to-black text-slate-100 dark:from-black dark:to-slate-900; }
+.theme-moral { @apply bg-gradient-to-br from-pastel-green to-emerald-50 dark:from-[#1b3320] dark:to-slate-900; }
+.theme-royal { @apply bg-gradient-to-br from-pastel-purple to-purple-100 dark:from-[#2e1d38] dark:to-slate-900; }
+
+.dark .theme-default { @apply text-slate-200; }
+.dark .theme-kids { @apply text-slate-200; }
+.dark .theme-horror { @apply text-slate-200; }
+.dark .theme-moral { @apply text-slate-200; }
+.dark .theme-royal { @apply text-slate-200; }
+
+/* Custom Scrollbar for better UI */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full dark:bg-slate-700;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-300 dark:bg-slate-600;
+}

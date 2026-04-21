@@ -1,0 +1,43 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isAdmin() {
+      return request.auth != null && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        request.auth.token.email == 'naitikjainxyz9119@gmail.com'
+      );
+    }
+    
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /stories/{storyId} {
+      allow read: if true;
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin() || (
+        incoming().diff(existing()).affectedKeys().hasOnly(['viewCount', 'updatedAt']) &&
+        incoming().viewCount == existing().viewCount + 1 &&
+        (incoming().updatedAt is number || incoming().updatedAt == request.time)
+      );
+    }
+  }
+}
